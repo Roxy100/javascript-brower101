@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Window load</title>
+    <script src="test.js" defer></script>
+  </head>
+  <body>
+    <script>
+      // only document : HTML만 완료가 되면 호출이 된다! (defer옵션과 같이)
+      window.addEventListener("DOMContentLoaded", () => {
+        console.log("DOMContentLoaded");
+      });
+      // after resources (css, images) : 리소스가 다 준비가 완료가 되면 불려진다!
+      window.addEventListener("load", () => {
+        console.log("load");
+      });
+      // before unload : 사요자가 페이지를 나갈 때 나가기 전에 불려지는 함수. 즉,페이지가 끝날 때 호출된다!
+      window.addEventListener("beforeunload", () => {
+        console.log("beforeunload");
+      });
+      // resource is being unloaded : 사용자가 페이지를 나갈 때 페이지가 unload되었을 때 불려진다!
+      window.addEventListener("unload", () => {
+        console.log("unload");
+      });
+    </script>
+  </body>
+</html>
