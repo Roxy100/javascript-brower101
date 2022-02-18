@@ -7,7 +7,45 @@ const BUG_COUNT = 5;
 const field = document.querySelector(".game__field");
 const fieldRect = field.getBoundingClientRect();
 
+const gameBtn = document.querySelector(".game__button");
+const gameTimer = document.querySelector(".game__timer");
+const gameScore = document.querySelector(".game__score");
+
+let gamestarted = false;
+let gamescore = 0;
+let gametimer = undefined;
+
+gameBtn.addEventListener("click", () => {
+  if (gamestarted) {
+    stopGame();
+  } else {
+    startGame();
+  }
+  gamestarted = !gamestarted;
+});
+
+function startGame() {
+  initGame();
+  showStopButton();
+  showTimerAndScore();
+}
+
+function stopGame() {}
+
+function showStopButton() {
+  const btnIcon = gameBtn.querySelector(".fa-play");
+  btnIcon.classList.add("fa-stop");
+  btnIcon.classList.remove("fa-play");
+}
+
+function showTimerAndScore() {
+  gameTimer.style.visibility = "visible";
+  gameScore.style.visibility = "visible";
+}
+
 function initGame() {
+  field.innerHTML = "";
+  gameScore.innerText = CARROT_COUNT;
   // 벌레와 당근을 생성한 뒤 field에 추가해줌
   addItem("carrot", CARROT_COUNT, "img/carrot.png");
   addItem("bug", BUG_COUNT, "img/bug.png");
@@ -36,5 +74,3 @@ function addItem(className, count, imgPath) {
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
-
-initGame();
