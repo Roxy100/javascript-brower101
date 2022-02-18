@@ -26,10 +26,17 @@ gameBtn.addEventListener("click", () => {
   } else {
     startGame();
   }
-  gamestarted = !gamestarted;
+});
+
+field.addEventListener("click", onFieldClick);
+
+popUpRefresh.addEventListener("click", () => {
+  startGame();
+  hidePopUp();
 });
 
 function startGame() {
+  gamestarted = true;
   initGame();
   showStopButton();
   showTimerAndScore();
@@ -37,13 +44,20 @@ function startGame() {
 }
 
 function stopGame() {
+  gamestarted = false;
   stopGameTimer();
   hideGameButton();
   showPopUpWithText("REPLAY❓");
 }
 
+function finishGame(win) {
+  gamestarted = false;
+  hideGameButton();
+  showPopUpWithText(win ? "YOU WON 🎉" : "YOU LOST 💩");
+}
+
 function showStopButton() {
-  const btnIcon = gameBtn.querySelector(".fa-play");
+  const btnIcon = gameBtn.querySelector(".fa-solid");
   btnIcon.classList.add("fa-stop");
   btnIcon.classList.remove("fa-play");
 }
@@ -63,6 +77,7 @@ function startGameTimer() {
   gametimer = setInterval(() => {
     if (remainingTimeSec <= 0) {
       clearInterval(gametimer);
+      finishGame(CARROT_COUNT === gamescore);
       return;
     }
     updateTimerText(--remainingTimeSec);
@@ -84,12 +99,39 @@ function showPopUpWithText(text) {
   popUp.classList.remove("pop-up--hide");
 }
 
+function hidePopUp() {
+  popUp.classList.add("pop-up--hide");
+}
+
 function initGame() {
   field.innerHTML = "";
   gameScore.innerText = CARROT_COUNT;
   // 벌레와 당근을 생성한 뒤 field에 추가해줌
   addItem("carrot", CARROT_COUNT, "img/carrot.png");
   addItem("bug", BUG_COUNT, "img/bug.png");
+}
+
+function onFieldClick(event) {
+  if (!gamestarted) {
+    return;
+  }
+  const target = event.target;
+  if (target.matches(".carrot")) {
+    // 당근!
+    target.remove();
+    gamescore++;
+    updateScoreBoard();
+    if (gamescore === CARROT_COUNT) {
+      finishGame(true);
+    }
+  } else if (target.matches(".bug")) {
+    stopGameTimer();
+    finishGame(false);
+  }
+}
+
+function updateScoreBoard() {
+  gameScore.innerText = CARROT_COUNT - gamescore;
 }
 
 function addItem(className, count, imgPath) {
