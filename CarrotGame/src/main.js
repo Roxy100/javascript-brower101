@@ -1,6 +1,6 @@
 "use strict";
 
-import GameBulder from "./game.js";
+import { GameBulder, Reason } from "./game.js";
 import PopUp from "./popup.js";
 
 const game = new GameBulder()
@@ -12,13 +12,13 @@ const game = new GameBulder()
 game.setGameStopListener((reason) => {
   let message;
   switch (reason) {
-    case "cancel":
+    case Reason.cancel:
       message = "Replay ❓";
       break;
-    case "win":
+    case Reason.win:
       message = "YOU WON 🎉";
       break;
-    case "lose":
+    case Reason.lose:
       message = "YOU LOST 💩";
       break;
     default:
