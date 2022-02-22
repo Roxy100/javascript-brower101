@@ -1,9 +1,14 @@
 "use strict";
 
-import Game from "./game.js";
+import GameBulder from "./game.js";
 import PopUp from "./popup.js";
 
-const game = new Game(20, 20, 20);
+const game = new GameBulder()
+  .withGameDuration(10)
+  .withCarrotCount(10)
+  .withBugCount(10)
+  .build();
+
 game.setGameStopListener((reason) => {
   let message;
   switch (reason) {
