@@ -73,7 +73,7 @@ function finishGame(win) {
 }
 
 function showStopButton() {
-  const btnIcon = gameBtn.querySelector(".fa-solid");
+  const btnIcon = gameBtn.querySelector(".fas");
   btnIcon.classList.add("fa-stop");
   btnIcon.classList.remove("fa-play");
   gameBtn.style.visibility = "visible";
