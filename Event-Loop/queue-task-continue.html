@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Queue Task Continue</title>
+    <style>
+      button {
+        font-size: 60px;
+      }
+      button:hover {
+        background-color: antiquewhite;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Continue with setTimeout</button>
+    <script>
+      function handleClick() {
+        console.log("handleClick");
+        setTimeout(() => {
+          console.log("setTimeout");
+          handleClick();
+        }, 0);
+      }
+      const button = document.querySelector("button");
+      button.addEventListener("click", () => {
+        handleClick();
+      });
+    </script>
+  </body>
+</html>
