@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz 1</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        margin-top: 30px;
+        background-color: royalblue;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Let's dance 💃</button>
+    <div class="box"></div>
+    <script>
+      const button = document.querySelector("button");
+      const box = document.querySelector(".box");
+      button.addEventListener("click", () => {
+        box.style.transition = "transform 1s ease-in";
+        box.style.transform = "translateX(800px)";
+        box.style.transform = "translateX(500px)"; // ✅
+        box.style.backgroundColor = "blue";
+        box.style.backgroundColor = "orange";
+        box.style.backgroundColor = "yellow"; // ✅
+      });
+    </script>
+  </body>
+</html>
